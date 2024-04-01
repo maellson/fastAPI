@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "fastapiconnect"
+version = "0.1.0"
+description = "Desenvolvendo APi usando FastAPI para aplicar internamente no projet de integração h2o.ai com ServiceNow"
+authors = ["maellson <mqmaellson39@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+sqlalchemy = "^2.0.29"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.13.1"
+python-decouple = "^3.8"
+passlib = "^1.7.4"
+python-jose = "^3.3.0"
+python-multipart = "^0.0.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
