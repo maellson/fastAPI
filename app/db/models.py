@@ -12,9 +12,11 @@ class UserModel(Base):
     password = Column('password', String, nullable=False)
 
 
+'''
 class LoginLogModel(Base):
     __tablename__ = 'login_logs'
     id = Column('id', Integer, primary_key=True,
                 nullable=False, autoincrement=True)
     username = Column('username', String, nullable=False)
     timestamp = Column('timestamp', DateTime, nullable=False)
+'''

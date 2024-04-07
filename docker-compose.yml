@@ -4,8 +4,11 @@ services:
   postgresql:
     image: postgres
     ports:
-      - 5433:5433
+      - "5433:5432"
     env_file:
       - ./.env
     volumes:
-      - /var/cache/postgres_data_2:/var/lib/postgresql/data
+      - meu_volume_postgres:/var/lib/postgresql/data
+
+volumes:
+  meu_volume_postgres:
