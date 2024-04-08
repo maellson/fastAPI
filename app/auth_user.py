@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from fastapi import status
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
@@ -7,6 +8,9 @@ from jose import jwt, JWTError
 from decouple import config
 from app.db.models import UserModel
 from app.schemas import User
+
+SECRET_KEY = config('SECRET_KEY')
+ALGORITHM = config('ALGORITHM')
 
 # A classe CryptContext é usada para criptografar e verificar senhas.
 crypt_context = CryptContext(schemes=['sha256_crypt'])
@@ -37,3 +41,31 @@ class UserUseCases:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail='User já existe na base de dados'
             )
+
+    def user_login(self, user: User, expires_in: int = 30):
+        user_model = self.db_session.query(UserModel).filter_by(
+            username=user.username
+        ).first()
+        if not user_model:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='User não encontrado'
+            )
+        if not crypt_context.verify(user.password, user_model.password):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail='Senha incorreta'
+            )
+        exp = datetime.utcnow() + timedelta(minutes=expires_in)
+
+        payload = {
+            'sub': user_model.username,
+            'exp': exp
+        }
+
+        access_token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+        return {
+            'access_token': access_token,
+            'exp': exp.isoformat()
+        }

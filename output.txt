@@ -1,0 +1,42 @@
+.
+├── README.md
+├── __pycache__
+│   └── main.cpython-311.pyc
+├── alembic.ini
+├── app
+│   ├── __pycache__
+│   │   ├── auth_user.cpython-311.pyc
+│   │   ├── depends.cpython-311.pyc
+│   │   ├── main.cpython-311.pyc
+│   │   ├── routes.cpython-311.pyc
+│   │   └── schemas.cpython-311.pyc
+│   ├── auth_user.py
+│   ├── db
+│   │   ├── __pycache__
+│   │   │   ├── base.cpython-311.pyc
+│   │   │   ├── connection.cpython-311.pyc
+│   │   │   └── models.cpython-311.pyc
+│   │   ├── base.py
+│   │   ├── connection.py
+│   │   └── models.py
+│   ├── depends.py
+│   ├── main.py
+│   ├── routes.py
+│   └── schemas.py
+├── docker-compose.yml
+├── migrations
+│   ├── README
+│   ├── __pycache__
+│   │   └── env.cpython-311.pyc
+│   ├── env.py
+│   ├── script.py.mako
+│   └── versions
+│       ├── 9e046ca6a8c9_add_users_tables.py
+│       └── __pycache__
+│           └── 9e046ca6a8c9_add_users_tables.cpython-311.pyc
+├── output.txt
+├── poetry.lock
+├── pyproject.toml
+└── tester_sql.py
+
+10 directories, 30 files
