@@ -69,3 +69,26 @@ class UserUseCases:
             'access_token': access_token,
             'exp': exp.isoformat()
         }
+
+    def verify_token(self, access_token):
+        try:
+            payload = jwt.decode(access_token, SECRET_KEY,
+                                 algorithms=[ALGORITHM])
+            username: str = payload.get('sub')
+            if username is None:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail='Token inválido'
+                )
+        except JWTError:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail='Token inválido'
+            )
+        user = self.db_session.query(UserModel).filter_by(
+            username=username).first()
+        if user is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail='User não encontrado'
+            )
